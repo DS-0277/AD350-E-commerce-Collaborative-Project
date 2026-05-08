@@ -1,7 +1,12 @@
+import Navbar from './components/Navbar.jsx';
+
 export default function App() {
-  return (
-    <div className="min-h-screen bg-surface flex items-center justify-center">
-      <h1 className="text-4xl font-black text-navy">Tailwind is working!</h1>
-    </div>
-  );
+  return (
+    <div>
+      <Navbar />
+      <main>
+        <p>App is running</p>
+      </main>
+    </div>
+  );
 }
