@@ -3,7 +3,7 @@
 > **Course Assignment** — AD350 H1 35267 — Full-Stack Integration Showcase  
 > **Students:** Mark (makayo), Dara (DS-0277)  
 > **Status:** Phase 1 — Planning & Documentation ✅  
-> **Quarter Week:** 4 of 11 — Starting Phase 1 Development
+> **Quarter Week:** 5 of 11 — Starting Phase 1 Development
 
 ---
 
@@ -30,9 +30,9 @@ A customer visiting the store can browse products and add items to a cart. Behin
 
 | Quarter Week | Phase | Goal |
 |---|---|---|
-| Week 4 | Phase 1 — Planning & Documentation | ✅ Complete |
-| Week 5 | Phase 2 — React + Vite Scaffold | Start development |
-| Week 6 | Phase 3 — PostgreSQL Schema + Supabase | Database design |
+| Week 5 | Phase 1 — Planning & Documentation | ✅ Complete |
+| Week 6 | Phase 2 — React + Vite Scaffold | Start development |
+| Week 7 | Phase 3 — PostgreSQL Schema + Supabase | Database design |
 | Week 7 | Phase 4 — API Testing with Postman | CRUD operations |
 | Week 8 | Phase 5 — Frontend + Supabase Integration | Connect UI to database |
 | Week 9 | Phase 6 — Testing & Final Showcase | YouTube + GitHub demo |
