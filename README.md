@@ -30,11 +30,11 @@ A customer visiting the store can browse products and add items to a cart. Behin
 
 | Quarter Week | Phase | Goal | Status |
 |---|---|---|---|
-| Week 5 | Phase 1 — Planning & Documentation | Define features, data structure, tech stack | ✅ Complete |
-| Week 6 | Phase 2 — React + Vite Scaffold | Build core pages and navigation | ✅ Complete |
+| Week 4 | Phase 1 — Planning & Documentation | Define features, data structure, tech stack | ✅ Complete |
+| Week 5 | Phase 2 — React + Vite Scaffold | Build core pages and navigation | ✅ Complete |
 | Week 6 | Phase 3 — PostgreSQL Schema + Supabase | Database design and setup | ✅ Complete |
-| Week 6 | Phase 4 — API Testing with Postman | Verify all endpoints return 200 OK | ✅ Complete |
-| Week 7 | Phase 5 — Frontend + Supabase Integration | Connect UI to live database | 🔄 In Progress |
+| Week 7 | Phase 4 — API Testing with Postman | Verify all endpoints return 200 OK | ✅ Complete |
+| Week 8 | Phase 5 — Frontend + Supabase Integration | Connect UI to live database | 🔄 In Progress |
 | Week 9 | Phase 6 — Testing & Final Showcase | YouTube + GitHub demo | 🔲 Pending |
 
 ---
