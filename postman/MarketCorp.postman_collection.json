@@ -1,0 +1,360 @@
+{
+  "info": {
+    "name": "MarketCorp API",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "description": "Postman collection for the MarketCorp e-commerce API. All requests use the Supabase PostgREST endpoint for the products table.\n\nCollection Variables:\n- SUPABASE_URL: Base URL for the Supabase project\n- SUPABASE_ANON_KEY: Public anon key for read access\n\nSetup:\n1. Set SUPABASE_URL = https://sjfwzwqynuykrqdmgtfl.supabase.co\n2. Set SUPABASE_ANON_KEY = your legacy anon key from Supabase dashboard",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "SUPABASE_URL",
+      "value": "https://sjfwzwqynuykrqdmgtfl.supabase.co",
+      "type": "string",
+      "description": "Base URL for the Supabase project. Set this to your Supabase project URL."
+    },
+    {
+      "key": "SUPABASE_ANON_KEY",
+      "value": "",
+      "type": "string",
+      "description": "Supabase legacy anon key. Copy this from your Supabase dashboard under Project Settings > API > Project API keys > anon (public)."
+    }
+  ],
+  "item": [
+    {
+      "name": "GET all products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            }
+          ]
+        },
+        "description": "Returns the full product catalog. Expected: 200 OK with array of all products."
+      },
+      "response": []
+    },
+    {
+      "name": "GET featured products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&is_featured=eq.true",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "is_featured",
+              "value": "eq.true"
+            }
+          ]
+        },
+        "description": "Returns products where is_featured = true. Expected: 200 OK with featured products array."
+      },
+      "response": []
+    },
+    {
+      "name": "GET single product by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&id=eq.{{product_id}}",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "id",
+              "value": "eq.{{product_id}}"
+            }
+          ]
+        },
+        "description": "Returns a single product by its UUID. Set collection variable product_id to a valid product UUID. Expected: 200 OK with single product object."
+      },
+      "response": []
+    },
+    {
+      "name": "GET products by category",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.{{category}}",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "category",
+              "value": "eq.{{category}}"
+            }
+          ]
+        },
+        "description": "Filters products by category name. Set collection variable category to a valid category (e.g. Electronics, Clothing). Expected: 200 OK with filtered products array."
+      },
+      "response": []
+    },
+    {
+      "name": "GET products on sale",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&sale_price=not.is.null",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "sale_price",
+              "value": "not.is.null"
+            }
+          ]
+        },
+        "description": "Returns products that have a sale_price set (i.e. are currently on sale). Expected: 200 OK with on-sale products array."
+      },
+      "response": []
+    },
+    {
+      "name": "GET products by price range",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&price=gte.{{min_price}}&price=lte.{{max_price}}",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "price",
+              "value": "gte.{{min_price}}"
+            },
+            {
+              "key": "price",
+              "value": "lte.{{max_price}}"
+            }
+          ]
+        },
+        "description": "Filters products within a price range. Set min_price and max_price variables (e.g. 10 and 100). Expected: 200 OK with products in the price range."
+      },
+      "response": []
+    },
+    {
+      "name": "GET related products (same category)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.{{category}}&id=neq.{{product_id}}&limit=4",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "category",
+              "value": "eq.{{category}}"
+            },
+            {
+              "key": "id",
+              "value": "neq.{{product_id}}"
+            },
+            {
+              "key": "limit",
+              "value": "4"
+            }
+          ]
+        },
+        "description": "Returns products in the same category as the given product, excluding itself. Set category and product_id variables. Expected: 200 OK with up to 4 related products."
+      },
+      "response": []
+    },
+    {
+      "name": "GET products in stock",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "apikey",
+            "value": "{{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{SUPABASE_ANON_KEY}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&stock=gt.0",
+          "host": [
+            "{{SUPABASE_URL}}"
+          ],
+          "path": [
+            "rest",
+            "v1",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "select",
+              "value": "*"
+            },
+            {
+              "key": "stock",
+              "value": "gt.0"
+            }
+          ]
+        },
+        "description": "Returns products that are currently in stock (stock > 0). Expected: 200 OK with in-stock products array."
+      },
+      "response": []
+    }
+  ]
+}
