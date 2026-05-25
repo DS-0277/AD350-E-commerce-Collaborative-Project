@@ -1,380 +1,380 @@
 {
-  "info": {
-    "name": "MarketCorp API",
-    "_postman_id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
-    "description": "Postman collection for the MarketCorp e-commerce API.\n\nAll 8 GET requests use Supabase PostgREST against the products table.\n\nCollection Variables:\n- SUPABASE_URL: https://sjfwzwqynuykrqdmgtfl.supabase.co\n- SUPABASE_ANON_KEY: (set from Supabase dashboard → Project Settings → API → anon public key)\n\nNote: Two requests (GET single product by ID and GET related products) require a real product UUID.\nReplace PASTE_UUID_HERE with a real UUID from:\n  SELECT id, name FROM products LIMIT 1;",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "variable": [
-    {
-      "key": "SUPABASE_URL",
-      "value": "https://sjfwzwqynuykrqdmgtfl.supabase.co",
-      "type": "string",
-      "description": "Base URL for the Supabase project."
+    "info": {
+          "name": "MarketCorp API",
+          "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "description": "Postman collection for the MarketCorp e-commerce API. All requests use the Supabase PostgREST endpoint for the products table.\n\nCollection Variables:\n- SUPABASE_URL: Base URL for the Supabase project\n- SUPABASE_ANON_KEY: Public anon key for read access\n\nSetup:\n1. Set SUPABASE_URL = https://sjfwzwqynuykrqdmgtfl.supabase.co\n2. Set SUPABASE_ANON_KEY = your legacy anon key from Supabase dashboard\n\nNote: Two requests (GET single product by ID and GET related products) require a real product UUID.\nReplace PASTE_UUID_HERE with a real UUID from:\n  SELECT id, name FROM products LIMIT 1;",
+          "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    {
-      "key": "SUPABASE_ANON_KEY",
-      "value": "",
-      "type": "string",
-      "description": "Supabase legacy anon key. Copy from Supabase dashboard → Project Settings → API → anon (public)."
-    }
-  ],
-  "item": [
-    {
-      "name": "GET all products",
-      "request": {
-        "method": "GET",
-        "header": [
+    "variable": [
           {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
+                  "key": "SUPABASE_URL",
+                  "value": "https://sjfwzwqynuykrqdmgtfl.supabase.co",
+                  "type": "string",
+                  "description": "Base URL for the Supabase project. Set this to your Supabase project URL."
           },
           {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
+                  "key": "SUPABASE_ANON_KEY",
+                  "value": "",
+                  "type": "string",
+                  "description": "Supabase legacy anon key. Copy this from your Supabase dashboard under Project Settings > API > Project API keys > anon (public)."
           }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&order=created_at.desc",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "order",
-              "value": "created_at.desc"
-            }
-          ]
-        },
-        "description": "Returns the full product catalog ordered by newest first.\n\nExpected: 200 OK — array of all 12 products."
-      },
-      "response": []
-    },
-    {
-      "name": "GET featured products",
-      "request": {
-        "method": "GET",
-        "header": [
+    ],
+    "item": [
           {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
+                  "name": "GET all products",
+                  "request": {
+                            "method": "GET",
+                            "header": [
+                                        {
+                                                      "key": "apikey",
+                                                      "value": "{{SUPABASE_ANON_KEY}}",
+                                                      "type": "text"
+                                        },
+                                        {
+                                                      "key": "Authorization",
+                                                      "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                      "type": "text"
+                                        }
+                            ],
+                            "url": {
+                                        "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&order=created_at.desc",
+                                        "host": [
+                                                      "{{SUPABASE_URL}}"
+                                        ],
+                                        "path": [
+                                                      "rest",
+                                                      "v1",
+                                                      "products"
+                                        ],
+                                        "query": [
+                                                      {
+                                                                      "key": "select",
+                                                                      "value": "*"
+                                                      },
+                                                      {
+                                                                      "key": "order",
+                                                                      "value": "created_at.desc"
+                                                      }
+                                        ]
+                            },
+                            "description": "Returns the full product catalog ordered by newest first.\n\nExpected: 200 OK — array of all 12 products."
+                  },
+                  "response": []
           },
           {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&is_featured=eq.true&limit=4",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "is_featured",
-              "value": "eq.true"
-            },
-            {
-              "key": "limit",
-              "value": "4"
-            }
-          ]
-        },
-        "description": "Returns up to 4 featured products (is_featured = true).\n\nExpected: 200 OK — array of 4 featured products (AeroMesh Chair, ProType Combo, Lumina Lamp, Executive Portfolio)."
-      },
-      "response": []
-    },
-    {
-      "name": "GET single product by ID",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
+                  "name": "GET featured products",
+                  "request": {
+                            "method": "GET",
+                            "header": [
+                                        {
+                                                      "key": "apikey",
+                                                      "value": "{{SUPABASE_ANON_KEY}}",
+                                                      "type": "text"
+                                        },
+                                        {
+                                                      "key": "Authorization",
+                                                      "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                      "type": "text"
+                                        }
+                            ],
+                            "url": {
+                                        "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&is_featured=eq.true&limit=4",
+                              "host": [
+                                            "{{SUPABASE_URL}}"
+                              ],
+                              "path": [
+                                            "rest",
+                                            "v1",
+                                            "products"
+                              ],
+                              "query": [
+                                            {
+                                                            "key": "select",
+                                                            "value": "*"
+                                            },
+                                            {
+                                                            "key": "is_featured",
+                                                            "value": "eq.true"
+                                            },
+                                            {
+                                                            "key": "limit",
+                                                            "value": "4"
+                                            }
+                              ]
+                  },
+                    "description": "Returns up to 4 featured products (is_featured = true).\n\nExpected: 200 OK — array of 4 featured products (AeroMesh Chair, ProType Combo, Lumina Lamp, Executive Portfolio)."
           },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&id=eq.PASTE_UUID_HERE",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "id",
-              "value": "eq.PASTE_UUID_HERE"
-            }
-          ]
-        },
-        "description": "Returns a single product by its UUID.\n\nSetup: Replace PASTE_UUID_HERE with a real product UUID from:\n  SELECT id, name FROM products LIMIT 1;\n\nExpected: 200 OK — array with one product object."
-      },
-      "response": []
-    },
+            "response": []
+},
     {
-      "name": "GET products by category",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.Audio&order=rating.desc",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
+            "name": "GET single product by ID",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&id=eq.PASTE_UUID_HERE",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "id",
+                                                      "value": "eq.PASTE_UUID_HERE"
+                                      }
+                        ]
             },
-            {
-              "key": "category",
-              "value": "eq.Audio"
-            },
-            {
-              "key": "order",
-              "value": "rating.desc"
-            }
-          ]
-        },
-        "description": "Returns all products in the Audio category, ordered by highest rating first.\n\nExpected: 200 OK — 6 Audio products sorted by rating descending.\n\nOther available categories: Seating, Tech, Lighting, Accessories."
-      },
-      "response": []
+              "description": "Returns a single product by its UUID.\n\nSetup: Replace PASTE_UUID_HERE with a real product UUID from:\n  SELECT id, name FROM products LIMIT 1;\n\nExpected: 200 OK — array with one product object."
     },
-    {
-      "name": "GET products on sale",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&sale_price=not.is.null&order=sale_price.asc",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "sale_price",
-              "value": "not.is.null"
-            },
-            {
-              "key": "order",
-              "value": "sale_price.asc"
-            }
-          ]
-        },
-        "description": "Returns all products that have a sale_price set, ordered by sale price ascending (cheapest first).\n\nExpected: 200 OK — 4 products on sale (ProType Combo $129, Sennheiser $299.95, Sony WH-1000XM5 $348, Standing Desk $649)."
-      },
       "response": []
+},
+    {
+            "name": "GET products by category",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.Audio&order=rating.desc",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "category",
+                                                      "value": "eq.Audio"
+                                      },
+                                      {
+                                                      "key": "order",
+                                                      "value": "rating.desc"
+                                      }
+                        ]
+            },
+              "description": "Returns all products in the Audio category, ordered by highest rating first.\n\nExpected: 200 OK — 6 Audio products sorted by rating descending.\n\nOther available categories: Seating, Tech, Lighting, Accessories."
     },
-    {
-      "name": "GET products by price range",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&price=gte.100&price=lte.400",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "price",
-              "value": "gte.100"
-            },
-            {
-              "key": "price",
-              "value": "lte.400"
-            }
-          ]
-        },
-        "description": "Returns all products with a price between $100 and $400 (inclusive).\n\nExpected: 200 OK — products within the $100–$400 price range."
-      },
       "response": []
+},
+    {
+            "name": "GET products on sale",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&sale_price=not.is.null&order=sale_price.asc",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "sale_price",
+                                                      "value": "not.is.null"
+                                      },
+                                      {
+                                                      "key": "order",
+                                                      "value": "sale_price.asc"
+                                      }
+                        ]
+            },
+              "description": "Returns all products that have a sale_price set, ordered by sale price ascending (cheapest first).\n\nExpected: 200 OK — 4 products on sale (ProType Combo $129, Sennheiser $299.95, Sony WH-1000XM5 $348, Standing Desk $649)."
     },
-    {
-      "name": "GET products in stock",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&stock=gt.0&order=rating.desc",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "stock",
-              "value": "gt.0"
-            },
-            {
-              "key": "order",
-              "value": "rating.desc"
-            }
-          ]
-        },
-        "description": "Returns all in-stock products (stock > 0), ordered by highest rating first.\n\nExpected: 200 OK — 11 products (excludes Minimalist Smart Watch which has stock = 0)."
-      },
       "response": []
+},
+    {
+            "name": "GET products by price range",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&price=gte.100&price=lte.400",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "price",
+                                                      "value": "gte.100"
+                                      },
+                                      {
+                                                      "key": "price",
+                                                      "value": "lte.400"
+                                      }
+                        ]
+            },
+              "description": "Returns all products with a price between $100 and $400 (inclusive).\n\nExpected: 200 OK — products within the $100-$400 price range."
     },
-    {
-      "name": "GET related products (same category)",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "apikey",
-            "value": "{{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          },
-          {
-            "key": "Authorization",
-            "value": "Bearer {{SUPABASE_ANON_KEY}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.Audio&id=neq.PASTE_UUID_HERE&limit=4",
-          "host": [
-            "{{SUPABASE_URL}}"
-          ],
-          "path": [
-            "rest",
-            "v1",
-            "products"
-          ],
-          "query": [
-            {
-              "key": "select",
-              "value": "*"
-            },
-            {
-              "key": "category",
-              "value": "eq.Audio"
-            },
-            {
-              "key": "id",
-              "value": "neq.PASTE_UUID_HERE"
-            },
-            {
-              "key": "limit",
-              "value": "4"
-            }
-          ]
-        },
-        "description": "Returns up to 4 related Audio products, excluding the current product by UUID.\n\nSetup: Replace PASTE_UUID_HERE with the same UUID used in 'GET single product by ID' (must be an Audio product for meaningful results).\n\nExpected: 200 OK — up to 4 Audio products excluding the specified product."
-      },
       "response": []
-    }
-  ]
+},
+    {
+            "name": "GET products in stock",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&stock=gt.0&order=rating.desc",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "stock",
+                                                      "value": "gt.0"
+                                      },
+                                      {
+                                                      "key": "order",
+                                                      "value": "rating.desc"
+                                      }
+                        ]
+            },
+              "description": "Returns all in-stock products (stock > 0), ordered by highest rating first.\n\nExpected: 200 OK — 11 products (excludes Minimalist Smart Watch which has stock = 0)."
+    },
+      "response": []
+},
+    {
+            "name": "GET related products (same category)",
+            "request": {
+                      "method": "GET",
+                      "header": [
+                                  {
+                                                "key": "apikey",
+                                                "value": "{{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  },
+                                  {
+                                                "key": "Authorization",
+                                                "value": "Bearer {{SUPABASE_ANON_KEY}}",
+                                                "type": "text"
+                                  }
+                      ],
+                      "url": {
+                                  "raw": "{{SUPABASE_URL}}/rest/v1/products?select=*&category=eq.Audio&id=neq.PASTE_UUID_HERE&limit=4",
+                        "host": [
+                                      "{{SUPABASE_URL}}"
+                        ],
+                        "path": [
+                                      "rest",
+                                      "v1",
+                                      "products"
+                        ],
+                        "query": [
+                                      {
+                                                      "key": "select",
+                                                      "value": "*"
+                                      },
+                                      {
+                                                      "key": "category",
+                                                      "value": "eq.Audio"
+                                      },
+                                      {
+                                                      "key": "id",
+                                                      "value": "neq.PASTE_UUID_HERE"
+                                      },
+                                      {
+                                                      "key": "limit",
+                                                      "value": "4"
+                                      }
+                        ]
+            },
+              "description": "Returns up to 4 related Audio products, excluding the current product by UUID.\n\nSetup: Replace PASTE_UUID_HERE with the same UUID used in 'GET single product by ID' (must be an Audio product for meaningful results).\n\nExpected: 200 OK — up to 4 Audio products excluding the specified product."
+    },
+      "response": []
+}
+]
 }
